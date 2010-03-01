@@ -1,18 +1,5 @@
 (ns clork)
 
-;; represent a room
-;; represent a set of rooms
-;; represent monsters
-;; (declare hall kitchen bag-of-gold sword)
-
-
-
-;; (def cell {:exits [hall kitchen]
-;;            :items [bag-of-gold sword]})
-
-;; (def hall {:exits [cell]
-;;            :items []})
-
 (def rooms {:hall {:description "A large vaulted hall"
                    :exits {:n :kitchen
                            :w :lounge}}
@@ -36,7 +23,13 @@
 
 (def the-player (atom (struct player :hall)))
 
-(defn west []
-  (swap! the-player #(move-player % rooms :w))
+(defn move-to [direction]
+  (swap! the-player #(move-player % rooms direction))
   (println (look rooms (:location @the-player))))
+
+
+;; Meta-program all the movement functions
+(doall
+	(map #(intern 'clork %1 (fn [] (move-to %2))) ['north 'east 'south 'west] [:n :e :s :w])
+)
     
