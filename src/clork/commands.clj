@@ -1,9 +1,7 @@
 (ns clork.commands
-	(:use clork.player))
+	(:use clork.player clork.data))
 
-(defn look
-	[]
-		(look rooms (:location the-player))
+(defn look-at
 	[rooms room]
 		(:description (room rooms)))
 

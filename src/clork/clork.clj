@@ -5,7 +5,11 @@
 
 (defn move-to [direction]
 	  (swap! the-player #(move-player % rooms direction))
-	  (println (look rooms (:location @the-player))))
+	  (println (look-at rooms (:location @the-player))))
+
+(defn look
+	[]
+	(look-at rooms (:location @the-player)))
 
 ;; Meta-program all the movement functions
 (doall
