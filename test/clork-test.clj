@@ -1,6 +1,6 @@
 
 (ns clork.test
-	(:use clojure.test clork))
+	(:use clojure.test clork.commands))
 
 (def test-map
 	{:start-room
