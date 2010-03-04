@@ -1,4 +1,4 @@
-(ns clork)
+(ns clork.clork)
 
 (def rooms {:hall {:description "A large vaulted hall"
                    :exits {:n :kitchen
@@ -30,6 +30,6 @@
 
 ;; Meta-program all the movement functions
 (doall
-	(map #(intern 'clork %1 (fn [] (move-to %2))) ['north 'east 'south 'west] [:n :e :s :w])
+	(map #(intern 'clork.clork %1 (fn [] (move-to %2))) ['north 'east 'south 'west] [:n :e :s :w])
 )
     
