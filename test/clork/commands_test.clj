@@ -1,6 +1,6 @@
 
 (ns clork.commands-test
-	(:use clojure.test clork.commands))
+	(:use clojure.test clork.commands clork.player))
 
 (def test-map
 	{:start-room
@@ -12,5 +12,7 @@
 	(is (= (move test-map {:location :start-room} :e))))
 
 (deftest look-test
-	(let [expected-description (:description (:start-room test-map))]
-	(is (= expected-description (look test-map :start-room)))))
+	(let [expected-description (:description (:start-room test-map))
+		the-player (atom (struct player :start-room))]
+	(is (= expected-description (look test-map :start-room)))
+	(is (= expected-description (look)))))
