@@ -1,8 +1,11 @@
 (ns clork.commands
 	(:use clork.player))
 
-(defn look [rooms room]
-  (:description (room rooms)))
+(defn look
+	[]
+		(look rooms (:location the-player))
+	[rooms room]
+		(:description (room rooms)))
 
 (defn move [rooms from direction]
   (direction (:exits (rooms from))))
