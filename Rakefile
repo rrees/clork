@@ -16,4 +16,8 @@ task :clork do
   system(run_clork)
 end
 
-task :test
+task :test do
+	  run_clork = "java -cp #{test_dirs.join(':')}:lib/clojure.jar:lib/jline-0.9.94.jar jline.ConsoleRunner clojure.main test/clork-test.clj"
+	  puts run_clork
+	  system(run_clork)
+end
