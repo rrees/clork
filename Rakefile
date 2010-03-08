@@ -5,22 +5,19 @@ test_dirs = ["test"]
 test_dirs << code_dirs
 
 run_jars = Dir.new('lib').entries.select{|f| f =~ /.*.jar/}.map {|jar| File.join('lib', jar)}
-#test_jars = Dir.new(File.join("lib", 'test')).entries.select
 
-task :default => [:hello]
-
-task :hello do
-  puts "Hello world"
-end
+task :default => [:clork]
 
 task :clork do
-  run_clork = "java -cp #{code_dirs.join(':')}:#{run_jars.join(':')} jline.ConsoleRunner clojure.main"
-  puts run_clork
-  system(run_clork)
+	classpath_entries = [] << run_jars << code_dirs
+	run_clork = "java -cp #{classpath_entries.join(':')} jline.ConsoleRunner clojure.main"
+	puts run_clork
+	system(run_clork)
 end
 
 task :test do
-	  run_clork = "java -cp #{test_dirs.join(':')}:#{run_jars.join(':')} jline.ConsoleRunner clojure.main test/clork-test.clj"
-	  puts run_clork
-	  system(run_clork)
+	classpath_entries = [] << test_dirs << run_jars
+	run_clork = "java -cp #{classpath_entries.join(':')} jline.ConsoleRunner clojure.main test/clork-test.clj"
+	puts run_clork
+	system(run_clork)
 end
